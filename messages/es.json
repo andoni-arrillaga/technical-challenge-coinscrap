@@ -1,0 +1,37 @@
+{
+  "Metadata": {
+    "title": "Coinscrap | Andoni",
+    "description": "Prueba técnica de Andoni Arrillaga para Coinscrap."
+  },
+  "TransactionsPage": {
+    "transactions": "Transacciones",
+    "searchPlaceholder": "Buscar por descripción..."
+  },
+  "TransactionsList": {
+    "search": "Buscar",
+    "category": "Categoría",
+    "allCategories": "Todas las categorías",
+    "groceries": "Comestibles",
+    "income": "Ingresos",
+    "subscriptions": "Suscripciones",
+    "dining": "Restaurantes",
+    "sortBy": "Ordenar por:",
+    "sortByDateAsc": "Fecha: De más antiguo a más reciente",
+    "sortByDateDesc": "Fecha: De más reciente a más antiguo",
+    "sortByAmountAsc": "Cantidad: De menor a mayor",
+    "sortByAmountDesc": "Cantidad: De mayor a menor",
+    "paid": "Pagado",
+    "pending": "Pendiente de pago",
+    "transactionsList": "Lista de transacciones",
+    "id": "ID",
+    "description": "Descripción",
+    "amount": "Cantidad",
+    "date": "Fecha",
+    "status": "Estado"
+  },
+  "Pagination": {
+    "pagination": "Paginación",
+    "previous_page": "Página anterior",
+    "next_page": "Página siguiente"
+  }
+}

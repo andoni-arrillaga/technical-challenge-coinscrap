@@ -1,0 +1,37 @@
+{
+  "Metadata": {
+    "title": "Coinscrap | Andoni",
+    "description": "Andoni Arrillaga's technical test for Coinscrap."
+  },
+  "TransactionsPage": {
+    "transactions": "Transactions",
+    "searchPlaceholder": "Search by description..."
+  },
+  "TransactionsList": {
+    "search": "Search",
+    "category": "Category",
+    "allCategories": "All Categories",
+    "groceries": "Groceries",
+    "income": "Income",
+    "subscriptions": "Subscriptions",
+    "dining": "Dining",
+    "sortBy": "Sort by:",
+    "sortByDateAsc": "Date: Oldest to Newest",
+    "sortByDateDesc": "Date: Newest to Oldest",
+    "sortByAmountAsc": "Amount: Lowest to Highest",
+    "sortByAmountDesc": "Amount: Highest to Lowest",
+    "paid": "Paid",
+    "pending": "Pending",
+    "transactionsList": "Transactions List",
+    "id": "ID",
+    "description": "Description",
+    "amount": "Amount",
+    "date": "Date",
+    "status": "Status"
+  },
+  "Pagination": {
+    "pagination": "Pagination",
+    "previous_page": "Previous page",
+    "next_page": "Next page"
+  }
+}

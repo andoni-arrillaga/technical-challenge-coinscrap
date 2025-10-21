@@ -1,4 +1,4 @@
-import { Category, SortOptions } from '@/app/lib/definitions';
+import { Category, SortOptions } from '@/lib/definitions';
 import { GET } from '../route';
 
 type Transaction = {

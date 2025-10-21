@@ -1,8 +1,9 @@
-import { fetchTransactions } from '@/app/lib/data';
-import { Category, SortOptions } from '@/app/lib/definitions';
-import { formatCurrency, formatDateToLocal } from '../lib/utils';
+import { Category, SortOptions } from '@/lib/definitions';
+import { formatCurrency, formatDateToLocal } from '@/lib/utils';
 import TransactionStatus from './TransactionStatus';
 import Pagination from './Pagination';
+import { fetchTransactions } from '@/lib/data';
+import { getTranslations } from 'next-intl/server';
 
 export default async function TransactionsList({
   query,
@@ -17,6 +18,7 @@ export default async function TransactionsList({
   sort: SortOptions;
   category?: Category;
 }) {
+  const t = await getTranslations('TransactionsList');
   const { data, totalTransactions } = await fetchTransactions(
     query,
     currentPage,
@@ -37,8 +39,18 @@ export default async function TransactionsList({
                   <li
                     key={transaction.id}
                     tabIndex={0}
-                    aria-label={`Transacción ${transaction.description} con un importe de ${transaction.amount} euros`}
-                    className='mb-2 w-full rounded-md bg-white p-4'
+                    aria-label={`${t('id')}: ${transaction.id}, ${t(
+                      'category'
+                    )}: ${transaction.category}, ${t('description')}: ${
+                      transaction.description
+                    }, ${t('date')}: ${formatDateToLocal(
+                      transaction.date
+                    )}, ${t('amount')}: ${formatCurrency(
+                      transaction.amount
+                    )}, ${t('status')}: ${
+                      transaction.pending ? t('pending') : t('paid')
+                    }`}
+                    className='mb-2 w-full rounded-md bg-white p-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary'
                   >
                     <div className='flex items-start justify-between border-b border-primary pb-4'>
                       <div>
@@ -63,7 +75,7 @@ export default async function TransactionsList({
                       <TransactionStatus
                         status={transaction.pending}
                         aria-label={
-                          transaction.pending ? 'Pendiente' : 'Pagado'
+                          transaction.pending ? t('pending') : t('paid')
                         }
                       />
                     </div>
@@ -73,27 +85,28 @@ export default async function TransactionsList({
             </div>
             <table
               className='hidden min-w-full text-gray-50 md:table'
-              aria-label='Lista de Transacciones'
+              aria-label={t('transactionsList')}
             >
+              <caption className='sr-only'>{t('transactionsList')}</caption>
               <thead className='rounded-lg text-left text-sm font-normal'>
                 <tr>
                   <th scope='col' className='px-4 py-5 font-medium sm:pl-6'>
-                    Id
+                    {t('id')}
                   </th>
                   <th scope='col' className='px-3 py-5 font-medium'>
-                    Categoría
+                    {t('category')}
                   </th>
                   <th scope='col' className='px-3 py-5 font-medium'>
-                    Descripción
+                    {t('description')}
                   </th>
                   <th scope='col' className='px-3 py-5 font-medium'>
-                    Cantidad
+                    {t('amount')}
                   </th>
                   <th scope='col' className='px-3 py-5 font-medium'>
-                    Fecha
+                    {t('date')}
                   </th>
                   <th scope='col' className='px-3 py-5 font-medium'>
-                    Estado
+                    {t('status')}
                   </th>
                 </tr>
               </thead>
@@ -102,8 +115,18 @@ export default async function TransactionsList({
                   <tr
                     key={transaction.id}
                     tabIndex={0}
-                    aria-label={`Transacción ${transaction.description} con un importe de ${transaction.amount} euros`}
-                    className='w-full border-b border-primary py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg'
+                    aria-label={`${t('id')}: ${transaction.id}, ${t(
+                      'category'
+                    )}: ${transaction.category}, ${t('description')}: ${
+                      transaction.description
+                    }, ${t('date')}: ${formatDateToLocal(
+                      transaction.date
+                    )}, ${t('amount')}: ${formatCurrency(
+                      transaction.amount
+                    )}, ${t('status')}: ${
+                      transaction.pending ? t('pending') : t('paid')
+                    }`}
+                    className='w-full border-b border-primary py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary'
                   >
                     <td className='whitespace-nowrap py-3 pl-6'>
                       {transaction.id}
@@ -124,7 +147,7 @@ export default async function TransactionsList({
                       <TransactionStatus
                         status={transaction.pending}
                         aria-label={
-                          transaction.pending ? 'Pendiente' : 'Pagado'
+                          transaction.pending ? t('pending') : t('paid')
                         }
                       />
                     </td>
@@ -140,7 +163,11 @@ export default async function TransactionsList({
       </section>
     </div>
   ) : (
-    <div className='flex h-32 w-full items-center justify-center'>
+    <div
+      className='flex h-32 w-full items-center justify-center'
+      role='status'
+      aria-live='polite'
+    >
       <p>No transactions available.</p>
     </div>
   );

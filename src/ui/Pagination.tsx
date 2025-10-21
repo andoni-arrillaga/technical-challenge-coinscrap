@@ -3,11 +3,13 @@
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { generatePagination } from '@/app/lib/utils';
+import { generatePagination } from '@/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function Pagination({ totalPages }: { totalPages: number }) {
+  const t = useTranslations('Pagination');
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
@@ -24,12 +26,12 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   );
 
   return (
-    <nav aria-label='Paginación' className='inline-flex'>
+    <nav aria-label={t('pagination')} className='inline-flex'>
       <PaginationArrow
         direction='left'
         href={createPageURL(currentPage - 1)}
         isDisabled={currentPage <= 1}
-        ariaLabel='Página anterior'
+        ariaLabel={t('previousPage')}
       />
 
       <div className='flex -space-x-px' role='list'>
@@ -50,8 +52,8 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
               isActive={currentPage === page}
               ariaLabel={
                 currentPage === page
-                  ? `Página actual ${page}`
-                  : `Ir a la página ${page}`
+                  ? `${t('currentPage')} ${page}`
+                  : `${t('goToPage')} ${page}`
               }
             />
           );
@@ -62,7 +64,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
         direction='right'
         href={createPageURL(currentPage + 1)}
         isDisabled={currentPage >= totalPages}
-        ariaLabel={`Página siguiente`}
+        ariaLabel={`${t('nextPage')} ${currentPage + 1}`}
       />
     </nav>
   );

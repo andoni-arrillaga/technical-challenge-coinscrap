@@ -1,6 +1,9 @@
 import clsx from 'clsx';
+import { useTranslations } from 'next-intl';
 
 export default function TransactionStatus({ status }: { status: boolean }) {
+  const t = useTranslations('TransactionsList');
+
   return (
     <span
       className={clsx(
@@ -11,7 +14,7 @@ export default function TransactionStatus({ status }: { status: boolean }) {
         }
       )}
     >
-      {status ? <>Pendiente</> : <>Pagado</>}
+      {status ? <>{t('pending')}</> : <>{t('paid')}</>}
     </span>
   );
 }

@@ -1,11 +1,13 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 type Category = 'Groceries' | 'Income' | 'Subscriptions' | 'Dining';
 
 export default function CategorySelector() {
+  const t = useTranslations('TransactionsList');
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -34,17 +36,17 @@ export default function CategorySelector() {
 
   return (
     <div className='flex items-center'>
-      <label className='sr-only'>Categoría:</label>
+      <label className='sr-only'>{t('category')}:</label>
       <select
         value={field}
         onChange={handleChange}
         className='w-full rounded-full border-5 border-primary p-2 text-sm text-primary'
       >
-        <option value='All'>Todas las categorías</option>
-        <option value='Groceries'>Supermercado</option>
-        <option value='Income'>Ingresos</option>
-        <option value='Subscriptions'>Suscripciones</option>
-        <option value='Dining'>Comedor</option>
+        <option value='All'>{t('allCategories')}</option>
+        <option value='Groceries'>{t('groceries')}</option>
+        <option value='Income'>{t('income')}</option>
+        <option value='Subscriptions'>{t('subscriptions')}</option>
+        <option value='Dining'>{t('dining')}</option>
       </select>
     </div>
   );

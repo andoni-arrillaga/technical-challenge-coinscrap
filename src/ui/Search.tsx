@@ -1,10 +1,12 @@
 'use client';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useTranslations } from 'next-intl';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
 
 export default function Search({ placeholder }: { placeholder: string }) {
+  const t = useTranslations('TransactionsList');
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -24,7 +26,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   return (
     <div className='relative flex flex-1 shrink-0 w-full'>
       <label htmlFor='search' className='sr-only'>
-        Buscar:
+        {t('search')}:
       </label>
       <input
         className='peer block w-full rounded-full border-5 border-primary p-2 pl-10 text-sm text-primary placeholder:text-primary placeholder:opacity-35'
