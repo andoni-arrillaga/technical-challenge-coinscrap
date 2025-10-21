@@ -1,6 +1,6 @@
 export type Response<T> = {
   data: T;
-  totalTransactions?: number;
+  totalTransactions: number;
 };
 
 export type TransactionsItem = {
@@ -14,3 +14,9 @@ export type TransactionsItem = {
 };
 
 export type Category = 'Groceries' | 'Income' | 'Subscriptions' | 'Dining';
+
+export type SortOptions =
+  | 'asc-date'
+  | 'desc-date'
+  | 'asc-amount'
+  | 'desc-amount';

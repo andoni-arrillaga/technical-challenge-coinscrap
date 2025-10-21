@@ -39,9 +39,48 @@ const transactions = [
   },
 ];
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const query = searchParams.get('query')?.toLowerCase() || '';
+  const page = parseInt(searchParams.get('page') || '1', 10);
+  const limit = parseInt(searchParams.get('limit') || '10', 10);
+  const sort = searchParams.get('sort') || 'desc-date';
+  const category = searchParams.get('category');
+
+  let filteredTransactions = transactions;
+  if (query) {
+    filteredTransactions = transactions.filter(
+      (tx) =>
+        tx.description.toLowerCase().includes(query) ||
+        tx.category.toLowerCase().includes(query)
+    );
+  }
+  filteredTransactions = filteredTransactions.sort((a, b) => {
+    switch (sort) {
+      case 'asc-date':
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      case 'desc-date':
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      case 'asc-amount':
+        return a.amount - b.amount;
+      case 'desc-amount':
+        return b.amount - a.amount;
+      default:
+        return 0;
+    }
+  });
+  if (category) {
+    filteredTransactions = filteredTransactions.filter(
+      (tx) => tx.category === category
+    );
+  }
+
+  const startIndex = (page - 1) * limit;
+  const endIndex = startIndex + limit;
+  const data = filteredTransactions.slice(startIndex, endIndex);
+
   return NextResponse.json({
-    data: transactions,
+    data,
     totalTransactions: transactions.length,
   });
 }
