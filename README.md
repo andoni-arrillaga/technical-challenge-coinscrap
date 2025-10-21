@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+### 1) Contexto rápido
 
-## Getting Started
+- **Opción elegida**: (A | B | C).
+- **Alcance**: qué incluiste y qué dejaste fuera.
+- **Stack**: Next.js (versión), TypeScript, (Tailwind/CSS Modules), (Jest/Vitest + RTL), (Playwright opc.).
 
-First, run the development server:
+### 2) Cómo ejecutar
 
+````jsx
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+pnpm i
+
+pnpm dev    # arranca en http://localhost:3000
+
+````
+
+````
+
+Variables/flags relevantes: `NODE_ENV=`, `NEXT_TELEMETRY_DISABLED=1` (si lo usas).
+
+### 3) Cómo testear
+
+```jsx
+```bash
+
+pnpm test       # unit/integración
+
+pnpm test:e2e   # opcional si implementaste E2E
+
+````
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Cobertura opcional: `pnpm test -- --coverage`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 4) Decisiones clave
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **SSR/RSC/CSR**: elección y por qué (SEO, latencia, simplicidad).
+- **Estado**: local vs global; por qué evitar Redux aquí.
+- **Datos**: mock con Route Handler/MSW; paginación server/client.
+- **Estilos**: Tailwind o CSS Modules; criterio.
 
-## Learn More
+### 5) Accesibilidad (A11y)
 
-To learn more about Next.js, take a look at the following resources:
+Checklist mínimo:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Labels y roles correctos.
+- Navegación por teclado/foco visible.
+- Mensajes `aria-live` para loading/empty/error (si aplica).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 6) Seguridad
 
-## Deploy on Vercel
+- Evito `dangerouslySetInnerHTML` o lo uso con **sanitización**.
+- Considero **CSP** (comentado en README si procede) y **SameSite** en cookies (si aplica).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 7) Performance
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Decisiones de caché (`revalidate`, `no-store`) o motivos para no usarlas.
+- Evitar N+1 en cliente; paginación; memorización donde aporta.
+
+### 8) Testing (TDD breve)
+
+- Casos cubiertos: (p. ej., filtro por categoría, estado vacío, error API).
+- Muestra 1 commit **rojo→verde**.
+
+### 9) Trade‑offs y alternativas
+
+- Qué simplifiqué por tiempo y cómo lo haría “bien” con más tiempo.
+- Alternativas consideradas (p. ej., TanStack Query vs fetch RSC).
+
+### 10) Supuestos
+
+- Ej.: formato de fechas, zona horaria, categories conocidas.
+
+### 11) Próximos pasos (si tuviera 1–2 h más)
+
+- Añadir i18n (es/en) con `Intl`.
+- Gráfico simple en `/stats`.
+- E2E estable con datos seed.
+
+### 12) Tiempo invertido (aprox.)
+
+- Implementación: ~__ min · Tests: ~__ min · README: ~__ min.
+
+### 13) Notas para la revisión
+
+- Enlaces rápidos: ruta principal `/`, API `/api/transactions`, test files en `tests/` o `__tests__/`.
+```
