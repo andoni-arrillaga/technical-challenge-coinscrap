@@ -21,21 +21,25 @@ type TransactionParams = {
 
 function createMockRequest(method: string, params: TransactionParams): Request {
   const baseUrl = 'http://localhost:3000/api/transactions';
-  const search = new URLSearchParams(
-    Object.entries(params).filter(([, v]) => v !== undefined) as [
-      string,
-      string
-    ][]
-  ).toString();
+  const normalizedParams: Record<string, string> = {};
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value === undefined) return;
+
+    // Mapeamos `currentPage` → `page`
+    const normalizedKey = key === 'currentPage' ? 'page' : key;
+    normalizedParams[normalizedKey] = String(value);
+  });
+  const search = new URLSearchParams(normalizedParams).toString();
   const url = search ? `${baseUrl}?${search}` : baseUrl;
 
-  const minimalReq: Request = {
+  const request: Request = {
     url,
     method,
     headers: { 'Content-Type': 'application/json' },
   } as unknown as Request;
 
-  return minimalReq;
+  return request;
 }
 
 jest.mock('next/server', () => {
