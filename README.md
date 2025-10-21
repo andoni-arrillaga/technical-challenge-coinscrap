@@ -70,7 +70,6 @@ Checklist mínimo:
 
 ### 11) Próximos pasos (si tuviera 1–2 h más)
 
-- Añadir i18n (es/en) con `Intl`.
 - Gráfico simple en `/stats`.
 - E2E estable con datos seed.
 
