@@ -75,7 +75,7 @@ Checklist mínimo:
 
 ### 12) Tiempo invertido (aprox.)
 
-- Implementación: ~90 min · Tests: ~45 min · README: ~30 min.
+- Implementación: ~100 min · Tests: ~45 min · README: ~30 min.
 
 ### 13) Notas para la revisión
 

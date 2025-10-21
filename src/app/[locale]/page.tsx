@@ -5,6 +5,8 @@ import SortSelector from '@/ui/SortSelector';
 import TransactionsList from '@/ui/TransactionsList';
 import { getTranslations } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
+import { Suspense } from 'react';
+import { TransactionsListSkeleton } from '@/ui/TransactionsSkeleton';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -43,13 +45,15 @@ export default async function Home(props: {
             <SortSelector />
           </div>
         </section>
-        <TransactionsList
-          query={query}
-          currentPage={currentPage}
-          limit={limit}
-          sort={sort}
-          category={category}
-        />
+        <Suspense fallback={<TransactionsListSkeleton />}>
+          <TransactionsList
+            query={query}
+            currentPage={currentPage}
+            limit={limit}
+            sort={sort}
+            category={category}
+          />
+        </Suspense>
       </main>
       <footer className='row-start-3 flex gap-[24px] flex-wrap items-center justify-center'>
         <p>Andoni Arrillaga</p>

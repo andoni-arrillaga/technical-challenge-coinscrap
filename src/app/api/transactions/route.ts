@@ -40,6 +40,8 @@ const transactions = [
 ];
 
 export async function GET(request: Request) {
+  await new Promise((r) => setTimeout(r, 300)); // simular delay
+
   const { searchParams } = new URL(request.url);
   const query = searchParams.get('query')?.toLowerCase() || '';
   const page = parseInt(searchParams.get('page') || '1', 10);
