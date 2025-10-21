@@ -27,7 +27,13 @@
     "description": "Description",
     "amount": "Amount",
     "date": "Date",
-    "status": "Status"
+    "status": "Status",
+    "categoryOption": {
+      "groceries": "Groceries",
+      "income": "Income",
+      "subscriptions": "Subscriptions",
+      "dining": "Dining"
+    }
   },
   "Pagination": {
     "pagination": "Pagination",

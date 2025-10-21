@@ -132,7 +132,9 @@ export default async function TransactionsList({
                       {transaction.id}
                     </td>
                     <td className='whitespace-nowrap px-3 py-3'>
-                      {transaction.category}
+                      {t(
+                        `categoryOption.${transaction.category.toLowerCase()}`
+                      )}
                     </td>
                     <td className='whitespace-nowrap px-3 py-3'>
                       {transaction.description}

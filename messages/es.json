@@ -27,11 +27,18 @@
     "description": "Descripción",
     "amount": "Cantidad",
     "date": "Fecha",
-    "status": "Estado"
+    "status": "Estado",
+    "categoryOption": {
+      "groceries": "Comestibles",
+      "income": "Ingresos",
+      "subscriptions": "Suscripciones",
+      "dining": "Restaurantes"
+    }
   },
   "Pagination": {
     "pagination": "Paginación",
-    "previous_page": "Página anterior",
-    "next_page": "Página siguiente"
+    "currentPage": "Página actual",
+    "previousPage": "Página anterior",
+    "nextPage": "Página siguiente"
   }
 }
